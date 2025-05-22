@@ -2,14 +2,96 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lista de elementos</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Elementos con JS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .item {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .item h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .item ul {
+      padding-left: 20px;
+      margin: 10px 0 0;
+    }
+
+    .item ul li {
+      margin-bottom: 5px;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-  <h1>Lista de elementos</h1>
-  <p>Probando cambio</p>
-  <div id="contenedor"></div>
-  <script src="script.js"></script>
+  <h1>Listado de Elementos desde un Objeto Literal</h1>
+  <div class="container" id="list-container">
+    <!-- Aquí se insertará el contenido generado con JS -->
+  </div>
+
+  <script>
+    // Objeto literal con 9 objetos dentro, cada uno con 4 propiedades
+    const elementos = [
+      { nombre: "Manzana", color: "Rojo", sabor: "Dulce", origen: "España" },
+      { nombre: "Naranja", color: "Naranja", sabor: "Ácido", origen: "México" },
+      { nombre: "Plátano", color: "Amarillo", sabor: "Dulce", origen: "Ecuador" },
+      { nombre: "Fresa", color: "Rojo", sabor: "Dulce", origen: "Chile" },
+      { nombre: "Kiwi", color: "Verde", sabor: "Ácido", origen: "Nueva Zelanda" },
+      { nombre: "Pera", color: "Verde", sabor: "Dulce", origen: "Argentina" },
+      { nombre: "Cereza", color: "Rojo oscuro", sabor: "Dulce", origen: "Turquía" },
+      { nombre: "Mango", color: "Amarillo", sabor: "Dulce", origen: "India" },
+      { nombre: "Piña", color: "Amarillo", sabor: "Ácido y dulce", origen: "Costa Rica" }
+    ];
+
+    // Referencia al contenedor donde se pondrá la lista
+    const container = document.getElementById("list-container");
+
+    // Uso de map para recorrer el array y crear el HTML dinámicamente
+    const htmlItems = elementos.map(elem => {
+      return `
+        <div class="item">
+          <h2>${elem.nombre}</h2>
+          <ul>
+            <li><strong>Color:</strong> ${elem.color}</li>
+            <li><strong>Sabor:</strong> ${elem.sabor}</li>
+            <li><strong>Origen:</strong> ${elem.origen}</li>
+            <li><strong>Tipo:</strong> Fruta</li>
+          </ul>
+        </div>
+      `;
+    }).join(""); // join para concatenar todo en un string
+
+    // Insertar el HTML generado dentro del contenedor
+    container.innerHTML = htmlItems;
+  </script>
 </body>
 </html>
